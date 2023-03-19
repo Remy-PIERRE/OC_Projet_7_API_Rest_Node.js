@@ -1,25 +1,25 @@
 const express = require("express");
 const {
-  getBooks,
-  postBook,
-  getBook,
-  putBook,
+  getAllBooks,
+  createBook,
+  getSingleBook,
+  updateBook,
   deleteBook,
   postBookRating,
-  getBestraing,
+  getBestRating,
 } = require("../controllers/books");
 const authorize = require("../middlewares/authorize");
 
 const router = express.Router();
 
 /* routes */
-router.route("/").get(getBooks).post(authorize, postBook);
+router.route("/").get(getAllBooks).post(authorize, createBook);
 router
   .route("/:id")
-  .get(getBook)
-  .put(authorize, putBook)
+  .get(getSingleBook)
+  .put(authorize, updateBook)
   .delete(authorize, deleteBook);
 router.route("/:id/rating").post(authorize, postBookRating);
-router.route("/bestrating").get(getBestraing);
+router.route("/bestrating").get(getBestRating);
 
 module.exports = router;

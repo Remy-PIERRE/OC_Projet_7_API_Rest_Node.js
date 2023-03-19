@@ -1,37 +1,61 @@
-const getBooks = (req, res) => {
-  res.send("<h4>GetBooks Page</h4>");
+const Book = require("../Models/Books");
+
+const getAllBooks = async (req, res) => {
+  try {
+    const allBooks = await Book.find({});
+    res.status(200).json(allBooks);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
-const postBook = (req, res) => {
-  res.send("<h4>PostBook Page</h4>");
+const createBook = async (req, res) => {
+  try {
+    const newBook = await Book.create(req.body);
+    res.status(200).json(newBook);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
-const getBook = (req, res) => {
-  res.send("<h4>GetBook Page</h4>");
+const getSingleBook = async (req, res) => {
+  try {
+    const { id: bookId } = req.params;
+    const book = await Book.findById(bookId);
+    res.status(200).json(book);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
-const putBook = (req, res) => {
+const updateBook = (req, res) => {
   res.send("<h4>PutBook Page</h4>");
 };
 
-const deleteBook = (req, res) => {
-  res.send("<h4>DeleteBook Page</h4>");
+const deleteBook = async (req, res) => {
+  try {
+    const { id: bookId } = req.params;
+    await Book.findByIdAndDelete(bookId);
+    res.status(200).json({ success: true });
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
 const postBookRating = (req, res) => {
   res.send("<h4>PostBookRating Page</h4>");
 };
 
-const getBestraing = (req, res) => {
+const getBestRating = (req, res) => {
   res.send("<h4>GetBestraing Page</h4>");
 };
 
 module.exports = {
-  getBooks,
-  postBook,
-  getBook,
-  putBook,
+  getAllBooks,
+  createBook,
+  getSingleBook,
+  updateBook,
   deleteBook,
   postBookRating,
-  getBestraing,
+  getBestRating,
 };
