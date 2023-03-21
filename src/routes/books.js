@@ -9,17 +9,18 @@ const {
   getBestRating,
 } = require("../controllers/books");
 const authorize = require("../middlewares/authorize");
+const multer = require("../middlewares/multer");
 
 const router = express.Router();
 
 /* routes */
-router.route("/").get(getAllBooks).post(authorize, createBook);
+router.route("/").get(getAllBooks).post(authorize, multer, createBook);
+router.route("/bestrating").get(getBestRating);
 router
   .route("/:id")
   .get(getSingleBook)
-  .put(authorize, updateBook)
+  .put(authorize, multer, updateBook)
   .delete(authorize, deleteBook);
 router.route("/:id/rating").post(authorize, postBookRating);
-router.route("/bestrating").get(getBestRating);
 
 module.exports = router;
