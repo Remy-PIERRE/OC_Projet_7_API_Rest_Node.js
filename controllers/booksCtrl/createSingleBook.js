@@ -16,23 +16,6 @@ const createSingleBook = asyncWrapper(async (req, res, next) => {
       createCustomError("UserId send and user connected do not match.", 401)
     );
   }
-  // if (
-  //   !(
-  //     userId &&
-  //     newBook.title &&
-  //     newBook.author &&
-  //     imageUrl &&
-  //     newBook.year &&
-  //     newBook.genre
-  //   )
-  // ) {
-  //   return next(
-  //     createCustomError(
-  //       "Please provide complete book's data before submiting.",
-  //       400
-  //     )
-  //   );
-  // }
 
   /* process data */
   if (

@@ -14,7 +14,7 @@ const rateSingleBook = asyncWrapper(async (req, res, next) => {
   if (![1, 2, 3, 4, 5].includes(ratings.grade)) {
     return next(
       createCustomError(
-        "Please provide complete ratings data before submiting.",
+        "Please provide correct ratings data before submiting.",
         400
       )
     );
