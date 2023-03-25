@@ -21,7 +21,7 @@ const signUp = asyncWrapper(async (req, res, next) => {
   await User.create({ email, password: hashedPwd });
 
   /* response */
-  res.status(200).json({ message: "User created with success." });
+  res.status(201).json({ message: "User created with success." });
 });
 
 module.exports = signUp;

@@ -1,8 +1,11 @@
 const express = require("express");
+/* get config */
 const connectDB = require("./utils/connect-DB");
 require("dotenv").config();
+const limiter = require("./utils/rateLimiter-config");
 /* get middlewares */
 const cors = require("cors");
+const helmet = require("helmet");
 const errorHandler = require("./middlewares/errorHandler");
 /* get routes */
 const authRouter = require("./routes/authRouter");
@@ -14,7 +17,9 @@ const app = express();
 
 /* middlewares */
 app.use("/public", express.static("public"));
+app.use(limiter);
 app.use(cors());
+app.use(helmet());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 

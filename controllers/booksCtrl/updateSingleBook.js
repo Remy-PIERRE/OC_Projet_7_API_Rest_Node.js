@@ -18,8 +18,6 @@ const updateSingleBook = asyncWrapper(async (req, res, next) => {
     newVersionBook = req.body;
   }
 
-  console.log("newVersionBook", newVersionBook);
-
   /* check data */
   if (userId !== newVersionBook.userId) {
     return next(
@@ -38,7 +36,7 @@ const updateSingleBook = asyncWrapper(async (req, res, next) => {
     return next(
       createCustomError(
         "Can't find any book with thoses userId and bookId matching.",
-        400
+        404
       )
     );
   }

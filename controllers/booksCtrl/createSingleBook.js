@@ -2,7 +2,7 @@ const asyncWrapper = require("../../middlewares/asyncWrapper");
 const createCustomError = require("../../Error/createCustomError");
 const Book = require("../../models/Book");
 
-const createSingleBookCtrl = asyncWrapper(async (req, res, next) => {
+const createSingleBook = asyncWrapper(async (req, res, next) => {
   /* get data */
   const userId = req.userId;
   const newBook = JSON.parse(req.body.book);
@@ -16,23 +16,23 @@ const createSingleBookCtrl = asyncWrapper(async (req, res, next) => {
       createCustomError("UserId send and user connected do not match.", 401)
     );
   }
-  if (
-    !(
-      userId &&
-      newBook.title &&
-      newBook.author &&
-      imageUrl &&
-      newBook.year &&
-      newBook.genre
-    )
-  ) {
-    return next(
-      createCustomError(
-        "Please provide complete book's data before submiting.",
-        400
-      )
-    );
-  }
+  // if (
+  //   !(
+  //     userId &&
+  //     newBook.title &&
+  //     newBook.author &&
+  //     imageUrl &&
+  //     newBook.year &&
+  //     newBook.genre
+  //   )
+  // ) {
+  //   return next(
+  //     createCustomError(
+  //       "Please provide complete book's data before submiting.",
+  //       400
+  //     )
+  //   );
+  // }
 
   /* process data */
   if (
@@ -54,4 +54,4 @@ const createSingleBookCtrl = asyncWrapper(async (req, res, next) => {
   return res.status(201).json({ message: "Book created with success." });
 });
 
-module.exports = createSingleBookCtrl;
+module.exports = createSingleBook;

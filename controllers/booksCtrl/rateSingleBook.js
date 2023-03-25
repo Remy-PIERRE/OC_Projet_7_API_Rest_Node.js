@@ -56,7 +56,7 @@ const rateSingleBook = asyncWrapper(async (req, res, next) => {
     return next(
       createCustomError(
         "Can't find any book with thoses userId and bookId matching.",
-        400
+        404
       )
     );
   }

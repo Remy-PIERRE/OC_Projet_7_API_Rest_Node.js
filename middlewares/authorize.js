@@ -7,7 +7,9 @@ const authorize = (req, res, next) => {
     req.userId = decodedToken.userId;
     next();
   } catch (error) {
-    res.status(401).send("Unauthorized. Please login to existing account.");
+    res
+      .status(401)
+      .json({ message: "Unauthorized. Please login to existing account." });
   }
 };
 
